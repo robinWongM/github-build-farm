@@ -30,15 +30,21 @@ jobs:
       run: CGO_ENABLED=0 GOOS=windows GOARCH=amd64 go build -v
       working-directory: caddy/
 
+    - name: Get Time
+      id: time
+      uses: nanzm/get-time-action@v1.0
+      with:
+        timeZone: 8
+        format: 'YYYY-MM-DD-HH-mm-ss'
+
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: true
+        tag_name: ${{ steps.time.outputs.time }}
+        release_name: Build artifacts @ ${{ steps.time.outputs.time }}
         
     - name: Upload Release Asset
       id: upload-release-asset 
