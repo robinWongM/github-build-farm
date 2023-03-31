@@ -33,7 +33,7 @@ jobs:
         CMD ["node", "index.js"]
 
     - name: Publish to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
+      uses: elgohr/Publish-Docker-Github-Action@v5
       with:
         name: m208/xmatrixstudio-violet-server
         tags: "2.0"
